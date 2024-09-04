@@ -14,7 +14,7 @@ def estimate_pi(num_samples):
     return pi_estimate
 
 def clear_progress():
-    print(" " * 80, end="\r")
+    print("\r\033[K", end="") 
 
 def print_progress(num_samples, current_iteration):
     max_indicators = 50
@@ -27,7 +27,7 @@ def print_progress(num_samples, current_iteration):
             progress += "."
         print(progress, end="\r")
 
-sample_sizes = np.geomspace(1, 3000000, num=15, dtype=int)
+sample_sizes = np.geomspace(10000, 7500000, num=15, dtype=int)
 for size in sample_sizes:
     estimate = estimate_pi(size)
     print(f"Sample size: {size}. Pi estimate: {estimate:.5f}")
