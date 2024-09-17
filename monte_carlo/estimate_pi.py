@@ -27,7 +27,8 @@ def print_progress(num_samples, current_iteration):
             progress += "."
         print(progress, end="\r")
 
-sample_sizes = np.geomspace(10000, 7500000, num=15, dtype=int)
+# sample_sizes = np.geomspace(10000, 7500000, num=15, dtype=int)
+sample_sizes = np.geomspace(10000, 7500000, num=3, dtype=int)
 for size in sample_sizes:
     estimate = estimate_pi(size)
     print(f"Sample size: {size}. Pi estimate: {estimate:.5f}")
