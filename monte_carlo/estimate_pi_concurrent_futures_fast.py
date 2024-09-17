@@ -12,7 +12,6 @@ def estimate_pi(num_samples):
     #   then sum each executor's points.
     desired_workers = 4
     worker_num_samples = int(num_samples / 4)
-    print("worker_num_samples: ", worker_num_samples)
     with concurrent.futures.ProcessPoolExecutor() as executor:
         workers = [executor.submit(estimate_pi_worker, worker_num_samples) for _ in range(desired_workers)]
         concurrent.futures.wait(workers)

@@ -1,6 +1,7 @@
 import numpy as np
 import concurrent.futures
 import multiprocessing
+import timeit
 
 def set_global(shared_points_inside_circle):
     global points_inside_circle  
@@ -15,7 +16,6 @@ def estimate_pi(num_samples):
         futures = [executor.submit(estimate_pi_worker) for _ in iterations]
         concurrent.futures.wait(futures)
 
-    print("points_inside_circle.value:", points_inside_circle.value)
     pi_estimate = 4 * points_inside_circle.value / num_samples
     return pi_estimate
 
@@ -25,22 +25,13 @@ def estimate_pi_worker():
         with points_inside_circle.get_lock():
             points_inside_circle.value += 1
 
-def clear_progress():
-    print("\r\033[K", end="") 
+def run_estimates():
+    # sample_sizes = np.geomspace(1000, 10000, num=3, dtype=int)
+    sample_sizes = np.geomspace(10000, 3000000, num=3, dtype=int)
+    for size in sample_sizes:
+        estimate = estimate_pi(size)
+        print(f"Sample size: {size}. Pi estimate: {estimate:.5f}")
 
-def print_progress(num_samples, current_iteration):
-    max_indicators = 50
-    indicator_period = int(num_samples / max_indicators) + 1
-    if current_iteration % indicator_period == 0:
-        periods = current_iteration / indicator_period
-        percent = int(current_iteration / num_samples * 100)
-        progress = f"Sample size: {num_samples}. {percent}% "
-        for _ in range(int(periods)):
-            progress += "."
-        print(progress, end="\r")
-
-# sample_sizes = np.geomspace(1000, 10000, num=3, dtype=int)
-sample_sizes = np.geomspace(10000, 7500000, num=3, dtype=int)
-for size in sample_sizes:
-    estimate = estimate_pi(size)
-    print(f"Sample size: {size}. Pi estimate: {estimate:.5f}")
+timer = timeit.Timer(lambda: run_estimates())
+execution_time = timer.timeit(number=1)
+print(f"\nTotal Execution Time: {execution_time} seconds")
