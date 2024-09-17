@@ -1,4 +1,5 @@
 import numpy as np
+import timeit
 
 def estimate_pi(num_samples):
     points_inside_circle = 0
@@ -27,8 +28,13 @@ def print_progress(num_samples, current_iteration):
             progress += "."
         print(progress, end="\r")
 
-# sample_sizes = np.geomspace(10000, 7500000, num=15, dtype=int)
-sample_sizes = np.geomspace(10000, 7500000, num=3, dtype=int)
-for size in sample_sizes:
-    estimate = estimate_pi(size)
-    print(f"Sample size: {size}. Pi estimate: {estimate:.5f}")
+def run_estimates():
+    # sample_sizes = np.geomspace(1000, 10000, num=3, dtype=int)
+    sample_sizes = np.geomspace(10000, 3000000, num=3, dtype=int)
+    for size in sample_sizes:
+        estimate = estimate_pi(size)
+        print(f"Sample size: {size}. Pi estimate: {estimate:.5f}")
+
+timer = timeit.Timer(lambda: run_estimates())
+execution_time = timer.timeit(number=1)
+print(f"\nTotal Execution Time: {execution_time} seconds")
