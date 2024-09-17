@@ -247,3 +247,13 @@ POST response:
 
 ### Observation
 The current prompts appear to support an ongoing back and forth. Next up - automate this so that we can see how long this can go. Open question - will either debater ever cede to their opponenet? Will changing "ardently" change that?
+
+# Next
+* Research Implementation Options
+  * API Request/Response
+  * JSON Read/Write
+  * Storage
+     1. Std Out
+     2. Flat file
+     3. Database
+     4. UI
