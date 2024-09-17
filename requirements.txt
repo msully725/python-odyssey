@@ -1,3 +1,4 @@
 pandas 
 fredapi
 numpy
+numba
