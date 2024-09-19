@@ -28,3 +28,15 @@ debaterTwoThread.messages = [
 
 response = api.send_chat_completion_request(debaterOneThread.to_request())
 print(response)
+
+# TODO: 
+# 1. Receive response from Debator One (D1)
+# 2. Append D1 response to Debator Two (D2) initial message
+# 3. Send D2 request, receive response
+# 4. Append D2 response to D1 request, send, receive response
+# 5. Append D1 response to D2 request, send, receive response
+# 6. Repeat 4,5
+#
+# 🤔 Thought: We are not appending a Debater's response to their own thread, 
+# which means they lose attention of what they have laredy said. 
+# Will need to think about how to remedy that.
